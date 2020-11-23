@@ -1,12 +1,14 @@
 const eris = require("eris");
-
+const mongoHelper = require("../Database/Helper");
 module.exports = class Client extends eris.Client{
-    constructor(token, options){
+    constructor(token, options, mongoUrl, mongoOptions){
         super(token, options);
 
 
 
         this.cmdsAndAlli = new Map();
+
+        this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);
     }
 
     get constants(){
@@ -34,5 +36,9 @@ module.exports = class Client extends eris.Client{
         const file = new (require(eventPath))(this);
         if(once == true) this.once(eventName, ...args => file.run(...args));
         else this.on(eventName, (...args) => file.run(...args));
+    }
+
+    async connectMongo(){
+        return await this.mongoHelper.connect();
     }
 } 

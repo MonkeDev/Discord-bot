@@ -10,8 +10,9 @@ module.exports = class{
         let prefix = this.bot.constants.Config.defaultPrefix;
         if(msg.author.bot || !msg.content.startsWith(prefix)) return;
 
-        let args = msg.content.split(/ +/);
+        let args = msg.content.split(/ +/)
         let cmd = args[0].toLowerCase().slice(prefix.length);
+        args = args.slice(1);
 
         cmd = await this.bot.cmdsAndAlli.get(cmd);
         if(!cmd) return;

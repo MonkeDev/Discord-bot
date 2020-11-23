@@ -1,4 +1,4 @@
 module.exports = {
-    defaultPrefix: "!",
+    defaultPrefix: ".",
     onceFiles: ["ready.js"]
 }

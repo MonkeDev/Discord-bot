@@ -18,6 +18,7 @@
   "homepage": "https://github.com/monke-dev/Discord-bot#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "eris": "^0.14.0"
+    "eris": "^0.14.0",
+    "mongoose": "^5.10.15"
   }
 }
