@@ -12,7 +12,8 @@ module.exports = class Client extends eris.Client{
     get constants(){
         return {
             Eris: require("../Constants/Eris"),
-            Config: require("../Constants/Config")
+            Config: require("../Constants/Config"),
+            Colors: require("../Constants/Colors")
         };
     }
 
