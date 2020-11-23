@@ -24,7 +24,6 @@ const init = async () => {
 
     let events = fs.readdirSync(__dirname + "/Events");
     events = events.filter(x => x.endsWith(".js"));
-    console.log(events)
     events.forEach(event => {
         let once = false
         if(event == "ready.js") once = true;
