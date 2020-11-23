@@ -16,6 +16,11 @@ module.exports = class Client extends eris.Client{
         };
     }
 
+    loadAddOn(addOnDir){
+        let file = require(addOnDir);
+        file(eris);
+    }
+
     loadCmd(cmdPath){
         const file = new (require(cmdPath))(this);
         this.cmdsAndAlli.set(file.name, file);

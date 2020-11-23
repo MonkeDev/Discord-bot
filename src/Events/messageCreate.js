@@ -4,6 +4,9 @@ module.exports = class{
     }
 
     async run(msg){
+
+        
+
         let prefix = this.bot.constants.Config.defaultPrefix;
         if(msg.author.bot || !msg.content.startsWith(prefix)) return;
 

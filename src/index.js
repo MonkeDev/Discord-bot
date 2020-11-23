@@ -29,6 +29,11 @@ const init = async () => {
         if(bot.constants.Config.onceFiles.includes(event)) once = true;
         bot.loadEvent(__dirname + "/Events/" + event, event.slice(0, event.length - 3), once);
     })
+
+    let addOns = fs.readdirSync(__dirname + "/erisAddOns");
+    addOns.forEach(addOn => {
+        bot.loadAddOn(__dirname + "/erisAddOns/" + addOn)
+    })
 };
 init();
 

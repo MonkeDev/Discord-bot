@@ -8,12 +8,11 @@ module.exports = class{
         this.dms = true;
 
         this.helpEmbed = {
-            title: `Help command`
+            title: 'Help command'
         }
     }
 
     async run(msg){
-        //console.log( msg.channel)
         msg.channel.send("hello")
     }
 
