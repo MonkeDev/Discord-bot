@@ -4,7 +4,16 @@ module.exports = class Client extends eris.Client{
     constructor(token, options){
         super(token, options);
 
+
+
         this.cmdsAndAlli = new Map();
+    }
+
+    get constants(){
+        return {
+            Eris: require("../Constants/Eris"),
+            Config: require("../Constants/Config")
+        };
     }
 
     loadCmd(cmdPath){
@@ -16,7 +25,6 @@ module.exports = class Client extends eris.Client{
     };
 
     loadEvent(eventPath, eventName, once){
-        console.log(eventName)
         const file = new (require(eventPath))(this);
         if(once == true) this.once(eventName, ...args => file.run(...args));
         else this.on(eventName, (...args) => file.run(...args));

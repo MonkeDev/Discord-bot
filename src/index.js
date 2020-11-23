@@ -26,7 +26,7 @@ const init = async () => {
     events = events.filter(x => x.endsWith(".js"));
     events.forEach(event => {
         let once = false
-        if(event == "ready.js") once = true;
+        if(bot.constants.Config.onceFiles.includes(event)) once = true;
         bot.loadEvent(__dirname + "/Events/" + event, event.slice(0, event.length - 3), once);
     })
 };
