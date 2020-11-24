@@ -5,6 +5,8 @@ module.exports = class {
         this.name = cmd.name || "none";
         this.alli = cmd.alli || [];
         this.category = cmd.category || "Other";
+        this.description = cmd.description || "None";
+        this.usage = cmd.usage || "None"
 
         this.bPerms = cmd.bPerms || [];
         this.mPerms = cmd.mPerms || [];
@@ -13,7 +15,7 @@ module.exports = class {
 
         this.cooldown = cmd.cooldown || 1500
 
-        this.helpEmbed = cmd.helpEmbed || { title: `No help embed given`, color: this.bot.constants.Colors.red }
+        this.helpEmbed = cmd.helpEmbed || { title: `No help embed`, color: this.bot.constants.Colors.red }
 
     }
 }

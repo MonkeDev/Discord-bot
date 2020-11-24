@@ -44,9 +44,10 @@ const init = async () => {
         bot.loadMongoEvent(__dirname + "/Database/Events/" + event, event.slice(0, event.length - 3));
     })
 
-    bot.connectMongo();
+    await bot.connectMongo();
+    
+    bot.connect();
     
 };
 init();
 
-bot.connect();

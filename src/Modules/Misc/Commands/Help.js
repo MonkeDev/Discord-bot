@@ -5,10 +5,8 @@ module.exports = class Help extends baseCmd {
             name: "help",
             dms: true,
             category: "Misc",
-            helpEmbed: {
-                title: 'Help',
-                description: ''
-            }
+            description: "Tells you how to use me",
+            usage: "help [command]"
         })
     }
 
@@ -45,7 +43,11 @@ module.exports = class Help extends baseCmd {
         }else{
             let cmd = await this.bot.cmdsAndAlli.get(args[0].toLowerCase());
             if(!cmd) return msg.channel.sendRedEmbed(`__**${args[0]}**__ is not a command`);
-            msg.channel.send({embed: cmd.helpEmbed})
+            msg.channel.send({embed: {
+                title: cmd.name,
+                color: this.bot.constants.Colors.main,
+                description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${cmd.usage}`
+            }})
         }
 
         

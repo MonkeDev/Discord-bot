@@ -1,3 +1,4 @@
+const data = {};
 module.exports = class{
     constructor(bot){
         this.bot = bot;
@@ -5,9 +6,8 @@ module.exports = class{
 
     async run(msg){
 
-        
-
-        let prefix = this.bot.constants.Config.defaultPrefix;
+        let prefix = await this.bot.getPrefixCache(msg.channel.guild.id);
+        console.log(prefix)
         if(msg.author.bot || !msg.content.startsWith(prefix)) return;
 
         let args = msg.content.split(/ +/)
