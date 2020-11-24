@@ -34,7 +34,7 @@ module.exports = class Client extends eris.Client{
 
     loadEvent(eventPath, eventName, once){
         const file = new (require(eventPath))(this);
-        if(once == true) this.once(eventName, ...args => file.run(...args));
+        if(once == true) this.once(eventName, (...args) => file.run(...args));
         else this.on(eventName, (...args) => file.run(...args));
     }
 

@@ -10,6 +10,10 @@ const bot = new Client(process.env.botToken, {
     },
     defaultImageFormat: "png",
     defaultImageSize: 512
+}, process.env.mongoInfo, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    autoIndex: true,
 });
 
 const init = async () => {
