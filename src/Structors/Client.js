@@ -15,6 +15,7 @@ module.exports = class Client extends eris.Client{
         this.prefixCache = new Map();
 
         this.cooldowns = new Map();
+        this.hardCooldown = new Map();
     }
 
     get constants(){
