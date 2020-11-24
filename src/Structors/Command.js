@@ -11,7 +11,6 @@ module.exports = class {
         this.bPerms = cmd.bPerms || [];
         this.mPerms = cmd.mPerms || [];
 
-        this.dms = cmd.dms || false;
 
         this.cooldown = cmd.cooldown || 1500
 

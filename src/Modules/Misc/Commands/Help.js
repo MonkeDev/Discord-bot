@@ -1,3 +1,5 @@
+const prettyMs = require("pretty-ms");
+
 const baseCmd = require("../../../Structors/Command");
 module.exports = class Help extends baseCmd {
     constructor(bot){
@@ -10,7 +12,7 @@ module.exports = class Help extends baseCmd {
         })
     }
 
-    async run(msg, args){
+    async run(msg, args, data){
         
         
         
@@ -44,9 +46,9 @@ module.exports = class Help extends baseCmd {
             let cmd = await this.bot.cmdsAndAlli.get(args[0].toLowerCase());
             if(!cmd) return msg.channel.sendRedEmbed(`__**${args[0]}**__ is not a command`);
             msg.channel.send({embed: {
-                title: cmd.name,
+                title: `${cmd.name}, ${cmd.category}`,
                 color: this.bot.constants.Colors.main,
-                description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${cmd.usage}`
+                description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${data.prefix}${cmd.usage}\n__**Cooldown**__\n\u3000${prettyMs(cmd.cooldown)}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
             }})
         }
 

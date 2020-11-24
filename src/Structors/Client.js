@@ -13,6 +13,8 @@ module.exports = class Client extends eris.Client{
         this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);
 
         this.prefixCache = new Map();
+
+        this.cooldowns = new Map();
     }
 
     get constants(){
