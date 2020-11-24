@@ -38,6 +38,14 @@ const init = async () => {
     addOns.forEach(addOn => {
         bot.loadAddOn(__dirname + "/erisAddOns/" + addOn)
     })
+
+    let mongoEvents = fs.readdirSync(__dirname + "/Database/Events");
+    mongoEvents.forEach(event => {
+        bot.loadMongoEvent(__dirname + "/Database/Events/" + event, event.slice(0, event.length - 3));
+    })
+
+    bot.connectMongo();
+    
 };
 init();
 

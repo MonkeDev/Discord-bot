@@ -1,5 +1,6 @@
 const eris = require("eris");
 const mongoHelper = require("../Database/Helper");
+const mongo = require('mongoose');
 module.exports = class Client extends eris.Client{
     constructor(token, options, mongoUrl, mongoOptions){
         super(token, options);
@@ -40,5 +41,11 @@ module.exports = class Client extends eris.Client{
 
     async connectMongo(){
         return await this.mongoHelper.connect();
+    }
+
+    loadMongoEvent(eventDir, eventName){
+        let file = new (require(eventDir))(this);
+        console.log(eventName)
+        mongo.connection.on(eventName, (...args) => file.run(...args))
     }
 } 
