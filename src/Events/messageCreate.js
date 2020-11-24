@@ -7,7 +7,6 @@ module.exports = class{
     async run(msg){
 
         let prefix = await this.bot.getPrefixCache(msg.channel.guild.id);
-        console.log(prefix)
         if(msg.author.bot || !msg.content.startsWith(prefix)) return;
 
         let args = msg.content.split(/ +/)
