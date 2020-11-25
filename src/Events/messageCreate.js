@@ -20,7 +20,7 @@ const checkHardCooldown = async (id, map) => {
         map.set(id, " ");
         setTimeout(() => {
             map.delete(id);
-        }, 1000);
+        }, 500);
     }
 }
 
@@ -46,14 +46,15 @@ module.exports = class{
 
         if(!cmd) return;
 
+        let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
+        if(checkedHardCooldown) return;
+
         if(!msg.channel.memberHasPermission(this.bot.user.id, this.bot.constants.Eris.perms.embedLinks)){
             let dmChannel = await msg.member.user.getDMChannel();
             return dmChannel.sendRedEmbed(`I do **__not__** have embedLinks permission in the channel <#${msg.channel.id}>, So you can **__NOT__** use me in that channel`).catch(err => {null});
         }
 
-        let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
-        if(checkedHardCooldown) return;
-
+    
         let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd);
         if(handledCooldown) return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
 

@@ -2,6 +2,8 @@ const eris = require("eris");
 const mongoHelper = require("../Database/Helper");
 const mongo = require('mongoose');
 const guilds = require("../Database/Schemas/Guild");
+const prettyMs = require("pretty-ms");
+
 module.exports = class Client extends eris.Client{
     constructor(token, options, mongoUrl, mongoOptions){
         super(token, options);
@@ -86,6 +88,14 @@ module.exports = class Client extends eris.Client{
 
     getRandomArrayElement(array){
         return array[Math.floor(Math.random() * array.length)];
+    }
+
+    makeHelpEmbed(cmd, prefix){
+        return {
+            title: `${cmd.name}, ${cmd.category}`,
+            color: this.constants.Colors.main,
+            description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${prefix}${cmd.usage}\n__**Cooldown**__\n\u3000${prettyMs(cmd.cooldown)}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
+        }
     }
 
 
