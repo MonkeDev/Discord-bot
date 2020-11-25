@@ -44,9 +44,16 @@ const init = async () => {
         bot.loadMongoEvent(__dirname + "/Database/Events/" + event, event.slice(0, event.length - 3));
     })
 
-    await bot.connectMongo();
-    
+    bot.connectMongo();
+
+    console.log("Init function has ran");
     
 };
+
+console.clear();
 init();
 
+
+process.on('unhandledRejection', err => {
+    bot.logger.hookLog(`${err}`, "@here unhandledRejection");
+});

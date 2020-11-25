@@ -34,21 +34,21 @@ module.exports = class{
 
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
         let prefix = data.guild.config.prefix;
-        if(!msg.content.startsWith(prefix)) return;
+        if(!msg.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 
         let args = msg.content.split(/ +/)
     
         let cmd = await this.bot.cmdsAndAlli.get(args[0].toLowerCase().slice(prefix.length));
         if(!cmd) {
             if(args[1]) cmd = await this.bot.cmdsAndAlli.get(args[1].toLowerCase());
-            args = args.slice(2);
+            if(cmd) args = args.slice(2);
         }else args = args.slice(1);
 
         if(!cmd) return;
 
         if(!msg.channel.memberHasPermission(this.bot.user.id, this.bot.constants.Eris.perms.embedLinks)){
             let dmChannel = await msg.member.user.getDMChannel();
-            return dmChannel.sendRedEmbed(`I do **__not__** have embedLinks permission in the channel <#${msg.channel.id}>, So you can **__NOT__** use me in that channel`);
+            return dmChannel.sendRedEmbed(`I do **__not__** have embedLinks permission in the channel <#${msg.channel.id}>, So you can **__NOT__** use me in that channel`).catch(err => {null});
         }
 
         let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);

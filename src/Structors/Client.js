@@ -19,6 +19,9 @@ module.exports = class Client extends eris.Client{
 
         this.cooldowns = new Map();
         this.hardCooldown = new Map();
+
+
+        this.logger = new (require("./Helpers/Logger"))(this, process.env.hookToken, process.env.hookID);
     }
 
     get constants(){
@@ -79,6 +82,10 @@ module.exports = class Client extends eris.Client{
             await data.save();
         }
         this.cache.guild.set(id, data);
+    }
+
+    getRandomArrayElement(array){
+        return array[Math.floor(Math.random() * array.length)];
     }
 
 
