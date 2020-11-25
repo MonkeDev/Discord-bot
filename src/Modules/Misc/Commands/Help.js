@@ -34,6 +34,7 @@ module.exports = class Help extends baseCmd {
             await categorys.forEach(c => {
                 let cmdsWithC = []
                 this.bot.cmdsAndAlli.forEach(cmd => {
+                    if(cmdsWithC.includes(cmd.name)) return;
                     if(cmd.category == c){
                         cmdsWithC.push(cmd.name)
                     }

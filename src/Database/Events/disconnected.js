@@ -6,6 +6,6 @@ module.exports = class{
 
     async run(){
         this.bot.disconnect();
-        console.log("Mongo is now connected");
+        console.log("Mongo is now disconnected");
     }
 }
