@@ -44,7 +44,7 @@ module.exports = class{
             args = args.slice(2);
         }else args = args.slice(1);
 
-        if(!cmd) return
+        if(!cmd) return;
 
         if(!msg.channel.memberHasPermission(this.bot.user.id, this.bot.constants.Eris.perms.embedLinks)){
             let dmChannel = await msg.member.user.getDMChannel();

@@ -18,6 +18,7 @@ module.exports = class Help extends baseCmd {
         
         let newPrefix = args[0];
         if(!newPrefix) return msg.channel.sendRedEmbed('A new prefix is **required**.');
+        if(newPrefix.length > 10) return msg.channel.sendRedEmbed("The new prefix can not be longer then **10** characters.")
 
         data.guild.config.prefix = newPrefix;
         await this.bot.updateGuildDataCache(msg.channel.guild.id, data.guild);
