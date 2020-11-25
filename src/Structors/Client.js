@@ -71,9 +71,14 @@ module.exports = class Client extends eris.Client{
         }
         return guildData;
     }
-    
-    async updateGuildDataCache(id){
+
+    async updateGuildDataCache(id, newData){
         let data = await this.getGuildData(id);
+        if(newData){
+            console.log(data, newData)
+            data = newData;
+            await data.save();
+        }
         this.cache.guild.set(id, data);
     }
 

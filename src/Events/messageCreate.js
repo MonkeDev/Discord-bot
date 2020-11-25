@@ -48,13 +48,23 @@ module.exports = class{
             return dmChannel.sendRedEmbed(`I do **__not__** have embedLinks permission in the channel <#${msg.channel.id}>, So you can **__NOT__** use me in that channel`);
         }
 
-        let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd);
-        if(handledCooldown){
-            let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
-            if(checkedHardCooldown) return;
-            return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
-        }
+        let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
+        if(checkedHardCooldown) return;
 
+        let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd);
+        if(handledCooldown) return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
+
+        let neededMPerms = [];
+        cmd.mPerms.forEach(perm => {
+            if(!msg.channel.memberHasPermission(msg.author.id, perm)) neededMPerms.push(perm);
+        })
+        if(neededMPerms.length != 0) return msg.channel.sendRedEmbed(`You are **missing** permission(s) to use this comamnd,\nNeeded permission(s): \`${neededMPerms.join("`, `")}\``);
+
+        let neededBPerms = [];
+        cmd.bPerms.forEach(perm => {
+            if(!msg.channel.memberHasPermission(this.bot.user.id, perm)) neededBPerms.push(perm);
+        })
+        if(neededBPerms.length != 0) return msg.channel.sendRedEmbed(`I am **missing** permission(s) to use this comamnd,\nNeeded permission(s): \`${neededBPerms.join("`, `")}\``);
 
         cmd.run(msg, args, data);
     };

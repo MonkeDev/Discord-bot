@@ -1,4 +1,16 @@
 module.exports = class {
+    /**
+     * 
+     * @param {} bot 
+     * @param {} cmd 
+     * @param {*} cmd.description
+     * @param {*} cmd.usage
+     * @param {*} cmd.bPerms
+     * @param {*} cmd.mPerms
+     * @param {*} cmd.category
+     * @param {*} cmd.cooldown
+     * @param {*} cmd.alli
+     */
     constructor(bot, cmd){
         this.bot = bot;
 
