@@ -37,11 +37,14 @@ module.exports = class{
         if(!msg.content.startsWith(prefix)) return;
 
         let args = msg.content.split(/ +/)
-        let cmd = args[0].toLowerCase().slice(prefix.length);
-        args = args.slice(1);
+    
+        let cmd = await this.bot.cmdsAndAlli.get(args[0].toLowerCase().slice(prefix.length));
+        if(!cmd) {
+            if(args[1]) cmd = await this.bot.cmdsAndAlli.get(args[1].toLowerCase());
+            args = args.slice(2);
+        }else args = args.slice(1);
 
-        cmd = await this.bot.cmdsAndAlli.get(cmd);
-        if(!cmd) return;
+        if(!cmd) return
 
         if(!msg.channel.memberHasPermission(this.bot.user.id, this.bot.constants.Eris.perms.embedLinks)){
             let dmChannel = await msg.member.user.getDMChannel();
@@ -65,6 +68,7 @@ module.exports = class{
             if(!msg.channel.memberHasPermission(this.bot.user.id, perm)) neededBPerms.push(perm);
         })
         if(neededBPerms.length != 0) return msg.channel.sendRedEmbed(`I am **missing** permission(s) to use this comamnd,\nNeeded permission(s): \`${neededBPerms.join("`, `")}\``);
+
 
         cmd.run(msg, args, data);
     };
