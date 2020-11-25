@@ -32,11 +32,12 @@ module.exports = class{
     async run(msg){
         if(!msg.channel.guild || msg.author.bot) return;
 
-        data.prefix = await this.bot.getPrefixCache(msg.channel.guild.id);
-        if(!msg.content.startsWith(data.prefix)) return;
+        data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
+        let prefix = data.guild.config.prefix;
+        if(!msg.content.startsWith(prefix)) return;
 
         let args = msg.content.split(/ +/)
-        let cmd = args[0].toLowerCase().slice(data.prefix.length);
+        let cmd = args[0].toLowerCase().slice(prefix.length);
         args = args.slice(1);
 
         cmd = await this.bot.cmdsAndAlli.get(cmd);

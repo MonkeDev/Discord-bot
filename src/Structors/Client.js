@@ -12,6 +12,9 @@ module.exports = class Client extends eris.Client{
 
         this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);
 
+        this.cache = {
+            guild: new Map()
+        }
         this.prefixCache = new Map();
 
         this.cooldowns = new Map();
@@ -60,18 +63,19 @@ module.exports = class Client extends eris.Client{
         return data;
     }
 
-    async getPrefixCache(id){
-        let prefix = await this.prefixCache.get(id);
-        if(!prefix) {
-            await this.updatePrefixCache(id);
-            prefix = await this.prefixCache.get(id);
+    async getGuildDataCache(id){
+        let guildData = await this.cache.guild.get(id);
+        if(!guildData){
+            await this.updateGuildDataCache(id);
+            guildData = await this.cache.guild.get(id);
         }
-        return prefix;
+        return guildData;
+    }
+    
+    async updateGuildDataCache(id){
+        let data = await this.getGuildData(id);
+        this.cache.guild.set(id, data);
     }
 
-    async updatePrefixCache(id){
-        let data = await this.getGuildData(id);
-        this.prefixCache.set(id, data.config.prefix);
-    }
 
 } 
