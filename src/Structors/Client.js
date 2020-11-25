@@ -24,6 +24,8 @@ module.exports = class Client extends eris.Client{
 
 
         this.logger = new (require("./Helpers/Logger"))(this, process.env.hookToken, process.env.hookID);
+
+        
     }
 
     get constants(){

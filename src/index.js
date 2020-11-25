@@ -19,7 +19,7 @@ const bot = new Client(process.env.botToken, {
 const init = async () => {
     const Modules = fs.readdirSync(__dirname + "/Modules");
     Modules.forEach(async Module => {
-        let cmdFiles = await fs.readdirSync(__dirname + "/Modules/" + Module + "/Commands");
+        let cmdFiles = fs.readdirSync(__dirname + "/Modules/" + Module + "/Commands");
         cmdFiles = cmdFiles.filter(x => x.endsWith(".js"));
         cmdFiles.forEach(cmd => {
             bot.loadCmd(__dirname + "/Modules/" + Module + "/Commands/" + cmd);
@@ -55,8 +55,8 @@ init();
 
 
 process.on('unhandledRejection', err => {
-    bot.logger.hookLog(`${err}`, "@here unhandledRejection");
+    bot.logger.hookLog(`${err}`, "@here unhandledRejection", "unhandledRejection", "https://i.imgur.com/M2CEEPp.jpg");
 });
 process.on("uncaughtException", err => {
-    bot.logger.hookLog(`${err}`, "@here uncaughtException");
+    bot.logger.hookLog(`${err}`, "@here uncaughtException", "uncaughtException", "https://i.imgur.com/M2CEEPp.jpg");
 })

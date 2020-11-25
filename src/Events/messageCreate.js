@@ -34,6 +34,9 @@ module.exports = class{
 
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
         let prefix = data.guild.config.prefix;
+
+        if(msg.content == `<@!${this.bot.user.id}>`) return msg.channel.send(`My prefix for **${msg.channel.guild.name}** is **${prefix}**, For more info --> \`${prefix}help\``)
+
         if(!msg.content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 
         let args = msg.content.split(/ +/)
