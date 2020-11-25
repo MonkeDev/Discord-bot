@@ -5,7 +5,7 @@ module.exports = class{
     }
 
     async run(){
-        this.bot.connect();
+        this.bot.disconnect();
         console.log("Mongo is now connected");
     }
 }

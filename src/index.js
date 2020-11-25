@@ -46,7 +46,6 @@ const init = async () => {
 
     await bot.connectMongo();
     
-    bot.connect();
     
 };
 init();
