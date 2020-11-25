@@ -57,3 +57,6 @@ init();
 process.on('unhandledRejection', err => {
     bot.logger.hookLog(`${err}`, "@here unhandledRejection");
 });
+process.on("uncaughtException", err => {
+    bot.logger.hookLog(`${err}`, "@here uncaughtException");
+})
