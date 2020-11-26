@@ -93,11 +93,38 @@ module.exports = class Client extends eris.Client{
     }
 
     makeHelpEmbed(cmd, prefix){
+        console.log(cmd.addPrefix)
+        if(cmd.addPrefix == "false") prefix = "";
         return {
             title: `${cmd.name}, ${cmd.category}`,
             color: this.constants.Colors.main,
             description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${prefix}${cmd.usage}\n__**Cooldown**__\n\u3000${prettyMs(cmd.cooldown)}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
         }
+    }
+
+    async structorMessage(guild, member, welcomeMessage){
+        let returns = [
+            {
+                in: "{member.username}",
+                out: member.username
+            },
+            {
+                in: "{member.mention}",
+                out: `<@!${member.id}>`
+            },
+            {
+                in: "{guild.name}",
+                out: guild.name
+            },
+            {
+                in: "{guild.memberCount}",
+                out: guild.memberCount
+            }
+        ]
+        returns.forEach(r => {
+            welcomeMessage = welcomeMessage.replace(r.in, r.out);
+        })
+        return welcomeMessage;
     }
 
 

@@ -19,6 +19,7 @@ module.exports = class {
         this.category = cmd.category || "Other";
         this.description = cmd.description || "None";
         this.usage = cmd.usage || "None"
+        this.addPrefix = cmd.addPrefix || true;
 
         this.bPerms = cmd.bPerms || [];
         this.mPerms = cmd.mPerms || [];

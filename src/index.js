@@ -9,7 +9,13 @@ const bot = new Client(process.env.botToken, {
         everyone: false
     },
     defaultImageFormat: "png",
-    defaultImageSize: 512
+    defaultImageSize: 512,
+    intents: [
+        "guilds",
+        "guildMembers",
+        "guildPresences",
+        "guildMessages"
+    ]
 }, process.env.mongoInfo, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

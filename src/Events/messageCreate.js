@@ -20,7 +20,7 @@ const checkHardCooldown = async (id, map) => {
         map.set(id, " ");
         setTimeout(() => {
             map.delete(id);
-        }, 500);
+        }, 700);
     }
 }
 
