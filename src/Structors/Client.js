@@ -113,6 +113,10 @@ module.exports = class Client extends eris.Client{
                 out: `<@!${member.id}>`
             },
             {
+                in: "{member.tag}",
+                out: `${member.username}#${member.discriminator}`
+            },
+            {
                 in: "{guild.name}",
                 out: guild.name
             },
