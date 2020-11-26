@@ -18,6 +18,9 @@ module.exports = class Help extends baseCmd {
     }
 
     async run(msg, args, data){
+
+        if(!args[0]) return msg.channel.sendRedEmbed("Please provide a option")
+
         if(args[0].toLowerCase() == "set" || args[0].toLowerCase() == "add" || args[0].toLowerCase() == "enable"){
 
             if(data.guild.config.welcomeMsg.id && data.guild.config.welcomeMsg.token) return msg.channel.sendRedEmbed("Welcome messages are already enabled please disable them first");
@@ -79,6 +82,8 @@ module.exports = class Help extends baseCmd {
             await this.bot.updateGuildDataCache(msg.channel.guild.id, data.guild);
 
             msg.channel.sendGreenEmbed("Welcome messages are now disabled");
+        }else{
+            msg.channel.sendRedEmbed(`**${args[0]}** is not a option`)
         }
         
 
