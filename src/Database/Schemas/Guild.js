@@ -9,6 +9,11 @@ module.exports = mongo.model("Guilds", new mongo.Schema({
             id: { type: String, default: null },
             token: { type: String, default: null },
             msg: { type: String, default: null },
+        },
+        leaveMsg: {
+            id: { type: String, default: null },
+            token: { type: String, default: null },
+            msg: { type: String, default: null },
         }
     }
 }))
