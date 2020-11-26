@@ -7,7 +7,7 @@ module.exports = class Help extends baseCmd {
             name: "welcome-message",
             alli: ["welcomemessage", "welcome-msg", "welcomemsg"],
             category: "Config",
-            description: "Sets up a welcome message on your server",
+            description: "__Info__\n\u3000\u3000Sets up a welcome message on your server\n\u3000__Tags__\n\u3000\u3000{member.username}\n\u3000\u3000{member.mention}\n\u3000\u3000{guild.name}\n\u3000\u3000{guild.memberCount}",
             usage: "__Enabling__:\n\u3000\u3000welcome-message <enable | set | add> <channel> <welcome message>\n\u3000__Disabling__:\n\u3000\u3000welcome-message <remove | disable | delete>",
             cooldown: 5000,
             mPerms: ["manageGuild", "manageWebhooks"],

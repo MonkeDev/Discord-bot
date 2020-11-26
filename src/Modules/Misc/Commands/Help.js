@@ -6,7 +6,8 @@ module.exports = class Help extends baseCmd {
             dms: true,
             category: "Misc",
             description: "Tells you how to use me",
-            usage: "help [command]"
+            usage: "help [command]",
+            cooldown: 1800
         })
     }
 
