@@ -30,6 +30,8 @@ module.exports = class{
     }
 
     async run(msg){
+
+
         if(!msg.channel.guild || msg.author.bot) return;
 
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
@@ -48,6 +50,8 @@ module.exports = class{
         }else args = args.slice(1);
 
         if(!cmd) return;
+
+        if(cmd.category == "Owner" && !this.bot.constants.Config.owners.includes(msg.author.id)) return;
 
         let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
         if(checkedHardCooldown) return;

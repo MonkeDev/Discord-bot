@@ -93,8 +93,7 @@ module.exports = class Client extends eris.Client{
     }
 
     makeHelpEmbed(cmd, prefix){
-        console.log(cmd.addPrefix)
-        if(cmd.addPrefix == "false") prefix = "";
+        if(cmd.addPrefix != true) prefix = "";
         return {
             title: `${cmd.name}, ${cmd.category}`,
             color: this.constants.Colors.main,

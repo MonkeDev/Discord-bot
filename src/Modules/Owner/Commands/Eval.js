@@ -18,13 +18,16 @@ module.exports = class Help extends baseCmd {
 
 
 
-        if(msg.author.id != "695520751842885672") return;
 
 
         let input = args.join(" "),
         hasAwait = input.includes("await"),
         evaled,
         startTime = Date.now();
+        if(!input) return msg.channel.send({
+            content: "Give me input bruh",
+            messageReference: { messageID: msg.id }
+        })
 
         try{
             evaled = await hasAwait ? eval(`(async () => { ${input} })()`) : eval(input);
@@ -36,6 +39,10 @@ module.exports = class Help extends baseCmd {
         }catch(err){
             evaled = err;
         }
+
+        evaled = evaled.toString();
+
+        if(!evaled) return msg.channel.sendRedEmbed("Nothing returned")
 
         msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.replace(this.bot.token, "botToken")}\`\`\``);
          
