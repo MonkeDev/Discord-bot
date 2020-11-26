@@ -17,14 +17,14 @@ module.exports = class{
                 },
                 username: this.bot.user.username,
                 avatarURL: this.bot.user.staticAvatarURL,
-            }).catch(async () => {
+            }).catch(() => {
                 data.guild.config.welcomeMsg = {
                     id: null,
                     token: null,
                     msg: null
                 }
                 
-                await this.bot.updateGuildDataCache(guild.id, data.guild);
+                this.bot.updateGuildDataCache(guild.id, data.guild);
             })
 
         }
