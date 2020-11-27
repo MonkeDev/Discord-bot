@@ -38,4 +38,10 @@ module.exports = Eris => {
 			return this.nick || this.username;
 		}
 	});
+
+	Object.defineProperty(Eris.Member.prototype, "tag", {
+        get: function() {
+            return `${this.username}#${this.discriminator}`
+        }
+    })
 };
