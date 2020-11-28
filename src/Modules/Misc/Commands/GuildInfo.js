@@ -32,15 +32,19 @@ module.exports = class Help extends baseCmd {
 
 
         let guild = msg.channel.guild;
-        console.log(guild.members)
         let embed = {
             color: this.bot.constants.Colors.main,
             author: {
                 name: guild.name,
                 icon_url: guild.iconURL
             },
-            description: `**Owner**: <@!${guild.ownerID}>\n\n**ID**: ${guild.id}\n**Region**: ${Object.getOwnPropertyDescriptor(region, guild.region).value}\n\n**Members**: ${guild.memberCount}\n**Channels**: ${guild.channels.size}`
+            description: `**Owner**: <@!${guild.ownerID}>\n\n**ID**: ${guild.id}\n**Region**: ${Object.getOwnPropertyDescriptor(region, guild.region).value}\n\n**Member count**: ${guild.memberCount}\n**Channel count**: ${guild.channels.size}\n**Role count**: ${guild.roles.size}`,
+            footer: {
+                text: `Created ${Math.floor((Date.now() - guild.createdAt) / 86400000)} Day(s) and ${Math.floor(((Date.now() - guild.createdAt) / (1000*60*60)) % 24)} Hour(s) ago`
+            }
         }
+
+
 
         msg.channel.send({embed: embed});
 

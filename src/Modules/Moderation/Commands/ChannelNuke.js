@@ -7,7 +7,7 @@ module.exports = class Help extends baseCmd {
         super(bot, {
             name: "channel-nuke",
             category: "Moderation",
-            description: "Deletes all the messages in a channel buy cloning it",
+            description: "Deletes all the messages in a channel by cloning it",
             usage: "channel-nuke",
             cooldown: 30000,
             bPerms: ["manageChannels"], 

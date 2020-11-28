@@ -20,7 +20,7 @@ const checkHardCooldown = async (id, map) => {
         map.set(id, " ");
         setTimeout(() => {
             map.delete(id);
-        }, 700);
+        }, 500);
     }
 }
 
@@ -51,7 +51,7 @@ module.exports = class{
 
         if(!cmd) return;
 
-        if(cmd.category == "Owner" && !this.bot.constants.Config.owners.includes(msg.author.id)) return;
+        if(cmd.category == "Owner" && !this.bot.constants.Config.owners.includes(msg.author.id)) return msg.reply("This is a owner **ONLY** command");
 
         let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
         if(checkedHardCooldown) return;

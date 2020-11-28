@@ -24,9 +24,8 @@ module.exports = class Help extends baseCmd {
         hasAwait = input.includes("await"),
         evaled,
         startTime = Date.now();
-        if(!input) return msg.channel.send({
+        if(!input) return msg.reply({
             content: "Give me input bruh",
-            messageReference: { messageID: msg.id }
         })
 
         try{

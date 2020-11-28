@@ -1,4 +1,5 @@
-require("dotenv").config();
+require("dotenv").config()
+
 const fs = require("fs");
 const Client = require("./Structors/Client");
 
@@ -13,7 +14,6 @@ const bot = new Client(process.env.botToken, {
     intents: [
         "guilds",
         "guildMembers",
-        "guildPresences",
         "guildMessages"
     ]
 }, process.env.mongoInfo, {
