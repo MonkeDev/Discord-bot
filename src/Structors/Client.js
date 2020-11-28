@@ -2,6 +2,7 @@ const eris = require("eris");
 const mongoHelper = require("../Database/Helper");
 const mongo = require('mongoose');
 const guilds = require("../Database/Schemas/Guild");
+const users = require("../Database/Schemas/Users");
 const prettyMs = require("pretty-ms");
 
 module.exports = class Client extends eris.Client{
@@ -15,7 +16,8 @@ module.exports = class Client extends eris.Client{
         this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);
 
         this.cache = {
-            guild: new Map()
+            guild: new Map(),
+            users: new Map()
         }
 
         this.cooldowns = new Map();
@@ -87,6 +89,31 @@ module.exports = class Client extends eris.Client{
         this.cache.guild.set(id, data);
     }
 
+    async getUserData(id){
+        let data = await users.findOne({id: id});
+        if(!data) data = await new users({id: id}).save();
+        return data;
+    }
+
+    async getUserDataCache(id){
+        let userData = await this.cache.users.get(id);
+        if(!userData){
+            await this.updateUserDataCahe(id);
+            userData = await this.cache.users.get(id);
+        }
+        return userData;
+    }
+
+    async updateUserDataCahe(id, newData){
+        let data = await this.getUserData(id);
+        if(newData){
+            data = newData;
+            await data.save();
+        }
+        this.cache.users.set(id, data);
+    }
+
+
     getRandomArrayElement(array){
         return array[Math.floor(Math.random() * array.length)];
     }
@@ -96,7 +123,7 @@ module.exports = class Client extends eris.Client{
         return {
             title: `${cmd.name}, ${cmd.category}`,
             color: this.constants.Colors.main,
-            description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${prefix}${cmd.usage}\n__**Cooldown**__\n\u3000${prettyMs(cmd.cooldown)}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
+            description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${prefix}${cmd.usage}\n__**Cooldown**__\n\u3000**Base**: ${prettyMs(cmd.cooldown)}\n\u3000**Prem server**: ${prettyMs(cmd.premCooldown)}\n\u3000**Prem user**: ${prettyMs(0)}\n__**Premium guild cooldown**__\n\u3000${cmd.premCooldown}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
         }
     }
 

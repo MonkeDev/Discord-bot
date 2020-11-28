@@ -1,4 +1,5 @@
 const { inspect } = require("util");
+const fetch = require("node-fetch")
 
 const baseCmd = require("../../../Structors/Command");
 
@@ -22,14 +23,15 @@ module.exports = class Help extends baseCmd {
 
         let input = args.join(" "),
         hasAwait = input.includes("await"),
+        hasReturn = input.includes("return"),
         evaled,
-        startTime = Date.now();
+        startTime = Date.now()
         if(!input) return msg.reply({
             content: "Give me input bruh",
         })
 
         try{
-            evaled = await hasAwait ? eval(`(async () => { ${input} })()`) : eval(input);
+            evaled = hasAwait ? await eval(`(async () => { ${hasReturn ? " " : "return"} ${input} })()`) : eval(input);
             if(typeof evaled != "string"){
                 evaled = inspect(evaled, {
                     depth: +!(inspect(evaled, { depth: 1 }))

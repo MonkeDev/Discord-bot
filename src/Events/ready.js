@@ -4,6 +4,6 @@ module.exports = class{
     }
 
     async run(){
-        console.log(`${this.bot.user.tag} is ready`)
+        console.log(`${this.bot.user.tag} is ready`);
     };
 }

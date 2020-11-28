@@ -15,5 +15,8 @@ module.exports = mongo.model("Guilds", new mongo.Schema({
             token: { type: String, default: null },
             msg: { type: String, default: null },
         }
+    },
+    prem: {
+        tier: { type: Number, default: 1 }
     }
 }))

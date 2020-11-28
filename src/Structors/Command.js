@@ -26,6 +26,7 @@ module.exports = class {
 
 
         this.cooldown = cmd.cooldown || 1500
+        this.premCooldown = cmd.premCooldown || 700
 
         this.helpEmbed = cmd.helpEmbed || { title: `No help embed`, color: this.bot.constants.Colors.red }
 
