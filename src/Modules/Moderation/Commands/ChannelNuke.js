@@ -19,11 +19,11 @@ module.exports = class Help extends baseCmd {
 
 
 
-        let channel = msg.channel
+        let channel = msg.channel;
 
         let channelOverwrites = []
         await channel.permissionOverwrites.forEach(overRight => {
-            channelOverwrites.push(overRight)
+            channelOverwrites.push(overRight);
         })
 
         let newChanOptions = {
@@ -33,10 +33,12 @@ module.exports = class Help extends baseCmd {
             rateLimitPerUser: channel.rateLimitPerUser,
             reason: "Channel nuke command",
             topic: channel.topic,
-        }
+        };
         await channel.delete();
         let newChan = await channel.guild.createChannel(channel.name, channel.type, newChanOptions);
-        await newChan.editPosition(channel.position);
+        await this.bot.editChannelPosition(newChan.id, channel.position).catch(() => {
+            return newChan.sendRedEmbed(`${msg.member.tag}, I Failed to edit channel position sorry`);
+        })
         newChan.sendGreenEmbed(`Channel nuked successfully by ${msg.member.tag}`);
         
     }

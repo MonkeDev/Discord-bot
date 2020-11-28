@@ -15,7 +15,9 @@ const bot = new Client(process.env.botToken, {
         "guilds",
         "guildMembers",
         "guildMessages"
-    ]
+    ],
+    getAllUsers: true
+
 }, process.env.mongoInfo, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

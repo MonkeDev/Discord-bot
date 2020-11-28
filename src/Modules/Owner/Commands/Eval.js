@@ -10,7 +10,7 @@ module.exports = class Help extends baseCmd {
             category: "Owner",
             description: "Evals some code",
             usage: "eval <code>",
-            cooldown: 0
+            cooldown: 1
         })
     }
 
