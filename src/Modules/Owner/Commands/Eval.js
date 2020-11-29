@@ -45,8 +45,27 @@ module.exports = class Help extends baseCmd {
 
         if(!evaled) return msg.channel.sendRedEmbed("Nothing returned")
 
-        msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.replace(this.bot.token, "botToken")}\`\`\``);
+        if(evaled.length > 1800){
+            const options = {
+                method: "POST",
+                body: `${input}\n\n\n${evaled}`,
+                headers: {
+                    "Content-Type": "text/plain"
+                }
+            }
+             
+            let fetched = await fetch('https://hasteb.in/documents', options)
+            fetched = await fetched.json();
+            return msg.reply(`https://hasteb.in/${fetched.key}.js`)
+        }else return msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.replace(this.bot.token, "botToken")}\`\`\``);
+        
          
         
     }
 }
+
+
+let all = []
+this.bot.users.forEach(aa => {
+    all.push(this.bot.users.get(aa.id))
+})
