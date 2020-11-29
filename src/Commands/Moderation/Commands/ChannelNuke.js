@@ -10,7 +10,6 @@ module.exports = class Help extends baseCmd {
             description: "Deletes all the messages in a channel by cloning it",
             usage: "channel-nuke",
             cooldown: 30000,
-            premCooldown: 5000,
             bPerms: ["manageChannels"], 
             mPerms: ["manageChannels"]
         })

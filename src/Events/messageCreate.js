@@ -1,19 +1,15 @@
 const data = {};
 const prettyMs = require("pretty-ms");
 
-const handleCooldown = async (id, map, cmd, data) => {
-    let cooldown = await map.get(`${id}_${cmd.name}`)
-    if(cooldown){
-        return prettyMs(cmd.cooldown - (Date.now() - cooldown));
-    }
+const handleCooldown = async (id, map, cmd) => {
+    let cooldown = await map.get(`${id}_${cmd.name}`);
+    if(cooldown) return prettyMs(cmd.cooldown - (Date.now() - cooldown));
     else{
         map.set(`${id}_${cmd.name}`, Date.now());
         setTimeout(() => {
-            map.delete(`${id}_${cmd.name}`)
-        }, cmd.cooldowm)
-        return null;
+            map.delete(`${id}_${cmd.name}`);
+        }, cmd.cooldown);
     }
-    
 }
 
 const checkHardCooldown = async (id, map) => {
@@ -69,7 +65,7 @@ module.exports = class{
         }
 
 
-        let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd, data);
+        let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd);
         if(handledCooldown) return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
 
         
