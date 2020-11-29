@@ -1,6 +1,6 @@
 const { inspect } = require("util");
 const fetch = require("node-fetch")
-
+const ms = require("ms");
 const baseCmd = require("../../../Structors/Command");
 
 module.exports = class Help extends baseCmd {
@@ -63,9 +63,3 @@ module.exports = class Help extends baseCmd {
         
     }
 }
-
-
-let all = []
-this.bot.users.forEach(aa => {
-    all.push(this.bot.users.get(aa.id))
-})

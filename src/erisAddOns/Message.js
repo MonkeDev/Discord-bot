@@ -7,3 +7,5 @@ module.exports = eris => {
         return this.channel.client.createMessage.call(this.channel.client, this.channel.id, content, file);
     }
 }
+
+

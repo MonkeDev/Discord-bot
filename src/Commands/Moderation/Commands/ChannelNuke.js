@@ -18,8 +18,6 @@ module.exports = class Help extends baseCmd {
 
     async run(msg, args, data){
 
-
-
         let channel = msg.channel;
 
         let channelOverwrites = []
@@ -37,10 +35,14 @@ module.exports = class Help extends baseCmd {
         };
         await channel.delete();
         let newChan = await channel.guild.createChannel(channel.name, channel.type, newChanOptions);
-        await this.bot.editChannelPosition(newChan.id, channel.position).catch(() => {
-            return newChan.sendRedEmbed(`${msg.member.tag}, I Failed to edit channel position sorry`);
-        })
-        newChan.sendGreenEmbed(`Channel nuked successfully by ${msg.member.tag}`);
+        setTimeout(async () => {
+            await this.bot.editChannelPosition(newChan.id, channel.position).catch(() => {
+                return newChan.sendRedEmbed(`${msg.member.tag}, I Failed to edit channel position sorry`);
+            })
+            newChan.sendGreenEmbed(`Channel nuked successfully by ${msg.member.tag}`);
+        }, 1500)
+        
+        
         
     }
 }

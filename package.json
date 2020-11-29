@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "eris": "github:monke-dev/erisInlines",
     "mongoose": "^5.10.15",
+    "ms": "^2.1.2",
     "pretty-ms": "^7.0.1"
   }
 }

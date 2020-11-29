@@ -10,7 +10,6 @@ module.exports = class Client extends eris.Client{
         super(token, options);
 
 
-
         this.cmdsAndAlli = new Map();
 
         this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);

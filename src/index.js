@@ -6,7 +6,7 @@ const Client = require("./Structors/Client");
 const bot = new Client(process.env.botToken, {
     allowedMentions: {
         roles: false,
-        users: false,
+        users: true,
         everyone: false
     },
     defaultImageFormat: "png",
@@ -25,12 +25,12 @@ const bot = new Client(process.env.botToken, {
 });
 
 const init = async () => {
-    const Modules = fs.readdirSync(__dirname + "/Modules");
-    Modules.forEach(async Module => {
-        let cmdFiles = fs.readdirSync(__dirname + "/Modules/" + Module + "/Commands");
+    const CommandFolders = fs.readdirSync(__dirname + "/Commands");
+    CommandFolders.forEach(async Module => {
+        let cmdFiles = fs.readdirSync(__dirname + "/Commands/" + Module + "/Commands");
         cmdFiles = cmdFiles.filter(x => x.endsWith(".js"));
         cmdFiles.forEach(cmd => {
-            bot.loadCmd(__dirname + "/Modules/" + Module + "/Commands/" + cmd);
+            bot.loadCmd(__dirname + "/Commands/" + Module + "/Commands/" + cmd);
         });
     });
 

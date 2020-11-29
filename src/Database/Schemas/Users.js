@@ -10,9 +10,9 @@ module.exports = mongo.model("Users", new mongo.Schema({
             multi: { type: Number, default: 1}
         }
     },
-    prem: {
-        tier: { type: Number, default: 1 }
+    profile: {
+        totalUsedCommands: { type: Number, default: 0 },
+        embedColor: {type: String, default: "#0a0000"}
     }
     
-
 }))

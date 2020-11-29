@@ -16,8 +16,6 @@ module.exports = class Help extends baseCmd {
 
     async run(msg, args, data){
 
-        if(data.author.prem.tier != 1) return msg.channel.sendGreenEmbed("You are a premium user your data is saved automatically")
-
         await this.bot.updateUserDataCahe(data.author.id, data.author);
 
         msg.channel.sendGreenEmbed("All of your data has been saved");

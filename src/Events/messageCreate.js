@@ -4,17 +4,13 @@ const prettyMs = require("pretty-ms");
 const handleCooldown = async (id, map, cmd, data) => {
     let cooldown = await map.get(`${id}_${cmd.name}`)
     if(cooldown){
-        if(data.guild.prem.tier == 1){
-            return prettyMs(cmd.cooldown - (Date.now() - cooldown));
-        }else{
-            return prettyMs(cmd.premCooldown - (Date.now() - cooldown));
-        }
+        return prettyMs(cmd.cooldown - (Date.now() - cooldown));
     }
     else{
         map.set(`${id}_${cmd.name}`, Date.now());
         setTimeout(() => {
             map.delete(`${id}_${cmd.name}`)
-        }, data.guild.prem.tier == 1 ? cmd.cooldowm : cmd.premCooldown);
+        }, cmd.cooldowm)
         return null;
     }
     
@@ -43,7 +39,8 @@ module.exports = class{
 
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
         data.author = await this.bot.getUserDataCache(msg.author.id);
-        
+
+        data.author.economy.money.wallet += (Math.floor(Math.random() * 15)) * data.author.economy.money.multi;
 
         let prefix = data.guild.config.prefix;
 
@@ -65,19 +62,16 @@ module.exports = class{
 
         let checkedHardCooldown = await checkHardCooldown(msg.channel.id, this.bot.hardCooldown);
         if(checkedHardCooldown) return;
-        
-        data.author.economy.money.wallet += (Math.floor(Math.random() * 15)) * data.author.economy.money.multi;
-        if(data.author.prem.tier != 1) this.bot.updateUserDataCahe(data.author.id, data.author);
 
         if(!msg.channel.memberHasPermission(this.bot.user.id, this.bot.constants.Eris.perms.embedLinks)){
             let dmChannel = await msg.member.user.getDMChannel();
             return dmChannel.sendRedEmbed(`I do **__not__** have embedLinks permission in the channel <#${msg.channel.id}>, So you can **__NOT__** use me in that channel`).catch(err => {null});
         }
 
-        if(data.author.prem.tier == 1){
-            let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd, data);
-            if(handledCooldown) return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
-        }
+
+        let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd, data);
+        if(handledCooldown) return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
+
         
 
         let neededMPerms = [];
@@ -95,5 +89,6 @@ module.exports = class{
 
         
         cmd.run(msg, args, data);
+        data.author.totalUsedCommands++;
     };
 }
