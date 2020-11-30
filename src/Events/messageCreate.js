@@ -30,7 +30,6 @@ module.exports = class{
 
     async run(msg){
 
-
         if(!msg.channel.guild || msg.author.bot) return;
 
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
@@ -85,6 +84,6 @@ module.exports = class{
 
         
         cmd.run(msg, args, data);
-        data.author.totalUsedCommands++;
+        data.author.profile.totalUsedCommands++;
     };
 }

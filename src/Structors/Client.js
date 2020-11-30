@@ -122,7 +122,7 @@ module.exports = class Client extends eris.Client{
         return {
             title: `${cmd.name}, ${cmd.category}`,
             color: this.constants.Colors.main,
-            description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${prefix}${cmd.usage}\n__**Cooldown**__\n\u3000**Base**: ${prettyMs(cmd.cooldown)}\n\u3000**Prem server**: ${prettyMs(cmd.premCooldown)}\n\u3000**Prem user**: ${prettyMs(0)}\n__**Premium guild cooldown**__\n\u3000${cmd.premCooldown}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
+            description: `__**Aliases**__\n\u3000${cmd.alli.join(", ") || "None"}\n__**Description**__\n\u3000${cmd.description}\n__**Usage**__\n\u3000${prefix}${cmd.usage}\n__**Cooldown**__\n\u3000${prettyMs(cmd.cooldown)}\n__**Permission(s) needed**__\n\u3000${cmd.mPerms.join(", ") || "None"}`
         }
     }
 
