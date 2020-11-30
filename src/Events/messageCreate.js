@@ -35,7 +35,11 @@ module.exports = class{
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
         data.author = await this.bot.getUserDataCache(msg.author.id);
 
-        data.author.economy.money.wallet += (Math.floor(Math.random() * 15)) * data.author.economy.money.multi;
+        data.author.economy.money.wallet = Math.floor(data.author.economy.money.wallet + (Math.random() * 15) * data.author.economy.money.multi)
+        if((Math.floor(Math.random() * 700)) < 2){
+            data.author.economy.money.multi = (data.author.economy.money.multi += .3).toFixed(2);
+            msg.channel.send(`<@!${msg.author.id}>, Congratulations you multi as gone up by .3 your new multi is ${data.author.economy.money.multi}!`);
+        }
 
         let prefix = data.guild.config.prefix;
 
