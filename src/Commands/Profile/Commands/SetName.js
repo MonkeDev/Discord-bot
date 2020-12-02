@@ -9,7 +9,7 @@ module.exports = class Help extends baseCmd {
             category: "Profile",
             description: "Change the name shown on your profile",
             usage: "set-name <new-name>",
-            cooldown: 15000
+            cooldown: 5000
         })
     }
 
