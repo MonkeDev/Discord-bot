@@ -13,14 +13,15 @@ module.exports = mongo.model("Users", new mongo.Schema({
     profile: {
         totalUsedCommands: { type: Number, default: 0 },
         embedColor: { type: Number, default: 0x0a0000 },
-        name: { type: String, default: null },
-        bio: { type: String, default: null },
-        twitter: { type: String, default: null },
-        insta: { type: String, default: null },
-        twitch: { type: String, default: null },
-        tiktok: { type: String, default: null},
-        youtube: { type: String, default: null },
-        dscbio: { type: String, default: null },
+        name: { type: String, required: false },
+        bio: { type: String, required: false },
+        twitter: { type: String, required: false },
+        insta: { type: String, required: false },
+        twitch: { type: String, required: false },
+        github: { type: String, required: false },
+        youtube: { type: String, required: false },
+        dscbio: { type: String, required: false },
     }
+    
     
 }))

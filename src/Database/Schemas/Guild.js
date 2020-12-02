@@ -6,14 +6,14 @@ module.exports = mongo.model("Guilds", new mongo.Schema({
     config: {
         prefix: { type: String, default: config.defaultPrefix },
         welcomeMsg: {
-            id: { type: String, default: null },
-            token: { type: String, default: null },
-            msg: { type: String, default: null },
+            id: { type: String, required: false },
+            token: { type: String, required: false },
+            msg: { type: String, required: false },
         },
         leaveMsg: {
-            id: { type: String, default: null },
-            token: { type: String, default: null },
-            msg: { type: String, default: null },
+            id: { type: String, required: false },
+            token: { type: String, required: false },
+            msg: { type: String, required: false },
         }
     },
 

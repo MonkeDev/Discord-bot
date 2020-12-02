@@ -4,23 +4,24 @@ const mongo = require('mongoose');
 const guilds = require("../Database/Schemas/Guild");
 const users = require("../Database/Schemas/Users");
 const prettyMs = require("pretty-ms");
+const exstendedmap = require('extendedmap');
 
 module.exports = class Client extends eris.Client{
     constructor(token, options, mongoUrl, mongoOptions){
         super(token, options);
 
 
-        this.cmdsAndAlli = new Map();
+        this.cmdsAndAlli = new exstendedmap();
 
         this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);
 
         this.cache = {
-            guild: new Map(),
-            users: new Map()
+            guild: new exstendedmap(),
+            users: new exstendedmap()
         }
 
-        this.cooldowns = new Map();
-        this.hardCooldown = new Map();
+        this.cooldowns = new exstendedmap();
+        this.hardCooldown = new exstendedmap();
 
 
         this.logger = new (require("./Helpers/Logger"))(this, process.env.hookToken, process.env.hookID);
@@ -37,8 +38,7 @@ module.exports = class Client extends eris.Client{
     }
 
     loadAddOn(addOnDir){
-        let file = require(addOnDir);
-        file(eris);
+        require(addOnDir)(eris, this);
     }
 
     loadCmd(cmdPath){

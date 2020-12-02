@@ -1,6 +1,10 @@
 const { inspect } = require("util");
 const fetch = require("node-fetch")
 const ms = require("ms");
+const os = require("os");
+
+
+
 const baseCmd = require("../../../Structors/Command");
 
 module.exports = class Help extends baseCmd {
@@ -57,7 +61,7 @@ module.exports = class Help extends baseCmd {
             let fetched = await fetch('https://hasteb.in/documents', options)
             fetched = await fetched.json();
             return msg.reply(`https://hasteb.in/${fetched.key}.js`)
-        }else return msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.replace(this.bot.token, "botToken")}\`\`\``);
+        }else return msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.replace(this.bot.token, "botToken").split(os.userInfo().username).join("userLogin")}\`\`\``);
         
          
         

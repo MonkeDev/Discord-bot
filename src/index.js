@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("../envSet")();
 
 const fs = require("fs");
 const Client = require("./Structors/Client");

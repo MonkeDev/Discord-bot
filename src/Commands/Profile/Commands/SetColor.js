@@ -21,6 +21,6 @@ module.exports = class Help extends baseCmd {
         let colors = this.bot.constants.Colors;
         if(!Object.keys(colors).includes(newColor)) return msg.reply(`${newColor}, Is now a options. Options: \`${Object.keys(colors).join("`, `")}\``)
         data.author.profile.embedColor = Object.getOwnPropertyDescriptor(colors, newColor).value;
-        msg.reply(`Your profile color is now **${newColor}**, Dont forget to save your data`);
+        msg.reply(`Your profile color is now **${newColor}**, Do not forget to save your data!`);
     }
 }
