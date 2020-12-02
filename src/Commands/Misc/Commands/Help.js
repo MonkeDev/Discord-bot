@@ -20,8 +20,9 @@ module.exports = class Help extends baseCmd {
             let embed = {
                 title: 'Help menu',
                 color: this.bot.constants.Colors.main,
-                fields: []
-            }   
+                fields: [],
+                description: `For more help on a command --> \`${data.guild.config.prefix}help <command>\``
+            }
 
             let categorys = [];
 
