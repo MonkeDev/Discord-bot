@@ -39,6 +39,7 @@ module.exports = class Help extends baseCmd {
 
                 let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.author.id == member.id, null, null, `${msg.author.tag} - clear command`);
                 clearMessage.edit(`Cleared ${clearAmout} messages!`);
+                clearMessage.delete(null, 5000)
                 
             }else if(filter == "bots"){
 
