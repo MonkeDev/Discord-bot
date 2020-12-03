@@ -11,6 +11,7 @@ module.exports = class Help extends baseCmd {
             usage: "kick <member>",
             cooldown: 3000,
             mPerms: ["kickMembers"],
+            bPerms: ["kickMembers"]
         })
     }
 
