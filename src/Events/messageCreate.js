@@ -71,7 +71,6 @@ module.exports = class{
         let handledCooldown = await handleCooldown(msg.author.id, this.bot.cooldowns, cmd);
         if(handledCooldown) return msg.channel.sendRedEmbed(`You are still in cooldown time left: ${handledCooldown}`);
 
-        
 
         let neededMPerms = [];
         cmd.mPerms.forEach(perm => {
@@ -88,6 +87,6 @@ module.exports = class{
 
         
         cmd.run(msg, args, data);
-        data.author.profile.totalUsedCommands++;
+        data.author.stats.UsedCommands++;
     };
 }

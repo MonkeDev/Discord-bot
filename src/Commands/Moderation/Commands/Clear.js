@@ -46,24 +46,28 @@ module.exports = class Help extends baseCmd {
                 let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
                 let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.author.bot, null, null, `${msg.author.tag} - clear command`);
                 clearMessage.edit(`Cleared ${clearAmout} messages!`);
+                clearMessage.delete(null, 5000)
 
             }else if(filter == "attachments"){
 
                 let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
                 let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.attachments[0], null, null, `${msg.author.tag} - clear command`);
                 clearMessage.edit(`Cleared ${clearAmout} messages!`);
+                clearMessage.delete(null, 5000)
 
             }else if(filter == "mentions"){
 
                 let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
                 let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.mentions[0] || x.id != clearMessage.id && !x.pinned && x.mentionEveryone || x.id != clearMessage.id && !x.pinned && x.roleMentions[0], null, null, `${msg.author.tag} - clear command`);
                 clearMessage.edit(`Cleared ${clearAmout} messages!`);
-
+                clearMessage.delete(null, 5000)
+                
             }else if(filter == "embeds"){
 
                 let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
                 let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.embeds[0], null, null, `${msg.author.tag} - clear command`);
                 clearMessage.edit(`Cleared ${clearAmout} messages!`);
+                clearMessage.delete(null, 5000)
 
             }else{
                 return msg.reply(`**${filter}** is not a valid filter.`);
@@ -72,6 +76,8 @@ module.exports = class Help extends baseCmd {
             let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
             let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned, null, null, `${msg.author.tag} - clear command`);
             clearMessage.edit(`Cleared ${clearAmout} messages!`);
+            clearMessage.delete(null, 5000)
+
         }
 
         
