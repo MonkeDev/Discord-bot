@@ -26,7 +26,17 @@ module.exports = class Help extends baseCmd {
             content: `Case #${foundCase.id}`,
             embed: {
                 title: `User ID: ${foundCase.userID}`,
-                description: `<@!${foundCase.userID}>\n\n__***Reason***__\n${foundCase.reason}`,
+                description: `<@!${foundCase.userID}>`,
+                fields: [
+                    {
+                        name: '__***Action***__',
+                        value: foundCase.action || "Not provided",
+                    },
+                    {
+                        name: '__***Reason***__',
+                        value: foundCase.reason
+                    }
+                ],
                 color: this.bot.constants.Colors.main
             }
         })

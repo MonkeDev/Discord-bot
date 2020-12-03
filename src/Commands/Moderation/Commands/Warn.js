@@ -29,7 +29,8 @@ module.exports = class Help extends baseCmd {
         data.guild.cases.push({
             id: data.guild.nextCaseId,
             userID: member.id,
-            reason: reason
+            reason: reason,
+            action: "Warn"
         })
 
         let toSendMessage = {
@@ -42,9 +43,7 @@ module.exports = class Help extends baseCmd {
         }
         msg.channel.send(toSendMessage);
         this.bot.getDMChannel(member.id).then(dms => {
-            try{
-                dms.send(toSendMessage)
-            }catch(err){ msg.channel.sendRedEmbed(`I could not DM ${member.tag}`) }
+            dms.send(toSendMessage).catch(() => {null})
         })
         if(data.guild.config.modLog.id && data.guild.config.modLog.token){
             this.bot.executeWebhook(data.guild.config.modLog.id,data.guild.config.modLog.token, {
@@ -58,7 +57,6 @@ module.exports = class Help extends baseCmd {
             }).catch(() => {
                 data.guild.config.modLog.id = null;
                 data.guild.config.modLog.token = null;
-                await this.bot.updateGuildDataCache(data.guild.id, data.guild);
             })
         }
 
