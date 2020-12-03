@@ -126,7 +126,7 @@ module.exports = class Client extends eris.Client{
         }
     }
 
-    async structorMessage(guild, member, welcomeMessage){
+    structorMessage(guild, member, welcomeMessage){
         let returns = [
             {
                 in: "{member.username}",
@@ -150,7 +150,7 @@ module.exports = class Client extends eris.Client{
             }
         ]
         returns.forEach(r => {
-            welcomeMessage = welcomeMessage.replace(r.in, r.out);
+            welcomeMessage = welcomeMessage.split(r.in).join(r.out);
         })
         return welcomeMessage;
     }

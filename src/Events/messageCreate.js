@@ -33,7 +33,9 @@ module.exports = class{
         if(!msg.channel.guild || msg.author.bot) return;
 
         data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
+        let startCacheTime = Date.now();
         data.author = await this.bot.getUserDataCache(msg.author.id);
+        data.author.fetchTime = Date.now() - startCacheTime;
 
         data.author.economy.money.wallet = Math.floor(data.author.economy.money.wallet + (Math.random() * 15) * data.author.economy.money.multi)
         if((Math.floor(Math.random() * 700)) < 2){

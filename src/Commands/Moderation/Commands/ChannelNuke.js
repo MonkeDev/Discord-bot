@@ -39,7 +39,7 @@ module.exports = class Help extends baseCmd {
                 return newChan.sendRedEmbed(`${msg.member.tag}, I Failed to edit channel position sorry`);
             })
             newChan.sendGreenEmbed(`Channel nuked successfully by ${msg.member.tag}`);
-        }, 1500)
+        }, 1500);
         
         
         
