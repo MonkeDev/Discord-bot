@@ -10,7 +10,7 @@ module.exports = class Help extends baseCmd {
             category: "Moderation",
             description: "Allows you to remove a case from a user.",
             usage: "remove-case <id>",
-            cooldown: 5000,
+            cooldown: 3000,
             mPerms: ["manageMessages"]
         })
     }
