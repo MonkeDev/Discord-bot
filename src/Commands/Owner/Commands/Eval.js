@@ -62,7 +62,7 @@ module.exports = class Help extends baseCmd {
             let fetched = await fetch('https://hasteb.in/documents', options)
             fetched = await fetched.json();
             return msg.reply(`https://hasteb.in/${fetched.key}.js`)
-        }else return msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.replace(this.bot.token, "botToken").split(os.userInfo().username).join("userLogin")}\`\`\``);
+        }else return msg.channel.send(`${Date.now() - startTime} ms\`\`\`js\n${evaled.split(this.bot.token).join("botToken").split(os.userInfo().username).join("userLogin").split(process.env.botToken).join("botToken")}\`\`\``);
         
          
         

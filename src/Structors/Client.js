@@ -16,7 +16,7 @@ module.exports = class Client extends eris.Client{
         this.mongoHelper = new mongoHelper(mongoUrl, mongoOptions);
 
         this.cache = {
-            guild: new exstendedmap(),
+            guilds: new exstendedmap(),
             users: new exstendedmap()
         }
 
@@ -71,10 +71,10 @@ module.exports = class Client extends eris.Client{
     }
 
     async getGuildDataCache(id){
-        let guildData = await this.cache.guild.get(id);
+        let guildData = await this.cache.guilds.get(id);
         if(!guildData){
             await this.updateGuildDataCache(id);
-            guildData = await this.cache.guild.get(id);
+            guildData = await this.cache.guilds.get(id);
         }
         return guildData;
     }
@@ -85,7 +85,7 @@ module.exports = class Client extends eris.Client{
             data = newData;
             await data.save();
         }
-        this.cache.guild.set(id, data);
+        this.cache.guilds.set(id, data);
     }
 
     async getUserData(id){

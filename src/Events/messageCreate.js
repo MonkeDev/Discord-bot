@@ -32,8 +32,11 @@ module.exports = class{
 
         if(!msg.channel.guild || msg.author.bot) return;
 
-        data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
         let startCacheTime = Date.now();
+        data.guild = await this.bot.getGuildDataCache(msg.channel.guild.id);
+        data.guild.fetchTime = Date.now() - startCacheTime;
+        
+        startCacheTime = Date.now();
         data.author = await this.bot.getUserDataCache(msg.author.id);
         data.author.fetchTime = Date.now() - startCacheTime;
 

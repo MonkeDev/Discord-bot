@@ -8,7 +8,7 @@ module.exports = class Help extends baseCmd {
             name: "ban",
             category: "Moderation",
             description: "Bans a member from the server",
-            usage: "ban <delete messages in days 1~7> <member>",
+            usage: "ban <delete messages in days 1~7> <member> [reason]",
             cooldown: 3000,
             mPerms: ["banMembers"],
             bPerms: ["banMembers"]

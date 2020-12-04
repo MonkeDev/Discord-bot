@@ -8,7 +8,7 @@ module.exports = class Help extends baseCmd {
             name: "kick",
             category: "Moderation",
             description: "Kicks a member from the server",
-            usage: "kick <member>",
+            usage: "kick <member> [reason]",
             cooldown: 3000,
             mPerms: ["kickMembers"],
             bPerms: ["kickMembers"]
