@@ -7,7 +7,7 @@ module.exports = class Help extends baseCmd {
         super(bot, {
             name: "clear",
             category: "Moderation",
-            description: "Mass deletes messages in a channel, No pinned messages will be deleted.\n\u3000__Filters__\n\u3000\u3000member <member>\n\u3000\u3000bots\n\u3000\u3000attachments\n\u3000\u3000mentions\n\u3000\u3000embeds",
+            description: "Mass deletes messages in a channel, No pinned messages will be deleted.\n\u3000__Filters__\n\u3000\u3000member <member>\u3000!member <member>\n\u3000\u3000bots\n\u3000\u3000attachments\n\u3000\u3000mentions\n\u3000\u3000embeds",
             usage: "clear <limit> [filter]",
             cooldown: 5000,
             bPerms: ["manageMessages"], 
@@ -68,6 +68,16 @@ module.exports = class Help extends baseCmd {
 
                 let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
                 let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.embeds[0], null, null, `${msg.author.tag} - clear command`);
+                clearMessage.edit(`Cleared ${clearAmout} messages!`);
+                clearMessage.delete(null, 5000);
+
+            }else if(filter == "!member"){
+
+                let member = msg.mentions[0] || msg.channel.guild.members.get(args[2]);
+                if(!member) return msg.reply("Please give a member by mention or ID.");
+                let clearMessage = await msg.channel.send("<a:Loading:783663632596467732> Clearing message(s)");
+
+                let clearAmout = await msg.channel.purge(amout, x => x.id != clearMessage.id && !x.pinned && x.author.id != member.id, null, null, `${msg.author.tag} - clear command`);
                 clearMessage.edit(`Cleared ${clearAmout} messages!`);
                 clearMessage.delete(null, 5000);
 

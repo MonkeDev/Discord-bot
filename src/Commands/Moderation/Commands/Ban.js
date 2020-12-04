@@ -34,7 +34,7 @@ module.exports = class Help extends baseCmd {
         let reason = args.slice(2).join(" ") || "None";
 
 
-        if(!member.isRestUser && !msg.member.highestRole.position > member.highestRole.position) return msg.reply(`You can not ban this member.`)
+        if(!member.isRestUser && msg.member.highestRole.position < member.highestRole.position) return msg.reply(`You can not ban this member.`)
         
 
 
@@ -51,8 +51,8 @@ module.exports = class Help extends baseCmd {
 
         if(!member.isRestUser){
             await this.bot.getDMChannel(member.id).then(dms => {
-                dms.send(toSendMessage);
-            }).catch(() => {null})
+                dms.send(toSendMessage).catch(() => {null});
+            });
         }
         if(isNaN(args[0]) || args[0] > 7 || args[0] < 0) args[0] = null;
         if(member.isRestUser){

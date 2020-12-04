@@ -37,6 +37,10 @@ module.exports = class Client extends eris.Client{
         };
     }
 
+    sleep(ms){
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
     loadAddOn(addOnDir){
         require(addOnDir)(eris, this);
     }

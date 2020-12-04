@@ -2,6 +2,8 @@ const { inspect } = require("util");
 
 const baseCmd = require("../../../Structors/Command");
 
+
+
 module.exports = class Help extends baseCmd {
     constructor(bot){
         super(bot, {
@@ -24,7 +26,7 @@ module.exports = class Help extends baseCmd {
 
         let reason = args.slice(1).join(" ") || "None";
 
-        if(!msg.member.highestRole.position > member.highestRole.position) return msg.reply(`You can not kick this member.`)
+        if(msg.member.highestRole.position < member.highestRole.position) return msg.reply(`You can not kick this member.`)
 
 
         if(!member.kickable) return msg.reply("I can not kick this member.");
@@ -39,10 +41,13 @@ module.exports = class Help extends baseCmd {
         }
 
         await this.bot.getDMChannel(member.id).then(dms => {
-            dms.send(toSendMessage);
-        }).catch(() => {null})
+            dms.send(toSendMessage).catch(() => {null});
+        })
 
+        await this.bot.sleep(400);
         await member.kick(`${msg.author.tag} - ${reason}`);
+
+        
 
         data.guild.cases.push({
             id: data.guild.nextCaseId,

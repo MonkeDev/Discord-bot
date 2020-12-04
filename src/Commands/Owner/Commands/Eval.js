@@ -4,7 +4,7 @@ const ms = require("ms");
 const os = require("os");
 const users = require("../../../Database/Schemas/Users");
 const guilds = require("../../../Database/Schemas/Guild");
-
+const prettyMs = require("pretty-ms");
 
 const baseCmd = require("../../../Structors/Command");
 
