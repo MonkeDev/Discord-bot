@@ -16,12 +16,13 @@ let region = {
     "india": ":flag_in: India"
 }
 
+const prettyMs = require("pretty-ms");
 const baseCmd = require("../../../Structors/Command");
-module.exports = class Help extends baseCmd {
+module.exports = class extends baseCmd {
     constructor(bot){
         super(bot, {
             name: "serverinfo",
-            alli: ["server"],
+            alli: ["server", "guildinfo", "guild"],
             category: "Misc",
             description: "Give you some server info",
             usage: "serverinfo"
@@ -32,21 +33,33 @@ module.exports = class Help extends baseCmd {
 
 
         let guild = msg.channel.guild;
-        let embed = {
-            color: this.bot.constants.Colors.main,
-            author: {
-                name: guild.name,
-                icon_url: guild.iconURL
-            },
-            description: `**Owner**: <@!${guild.ownerID}>\n\n**ID**: ${guild.id}\n**Region**: ${Object.getOwnPropertyDescriptor(region, guild.region).value}\n\n**Member count**: ${guild.memberCount}\n**Channel count**: ${guild.channels.size}\n**Role count**: ${guild.roles.size}`,
-            footer: {
-                text: `Created ${Math.floor((Date.now() - guild.createdAt) / 86400000)} Day(s) and ${Math.floor(((Date.now() - guild.createdAt) / (1000*60*60)) % 24)} Hour(s) ago`
+        let toSend = {
+            content: `Guild info on ${guild.name}.`,
+            embed: {
+                author: {
+                    name: guild.name,
+                    icon_url: guild.iconURL
+                },
+                color: this.bot.constants.Colors.main,
+                fields: [],
+                footer: {
+                    text: `ID: ${guild.id}`
+                },
+                description: `**Owner**: <@!${guild.ownerID}>`
             }
         }
 
+        toSend.embed.fields.push({name: '__Members__', value: `**Users**: \`${guild.members.filter(x => !x.bot).length}\`\n**Bots**: \`${guild.members.filter(x => x.bot).length}\`\n**Total**: \`${guild.memberCount}\``, inline: true});
+        toSend.embed.fields.push({name: '__Channels__', value: `**Text**: \`${guild.channels.filter(x => x.type == 0 || x.type == 5 || x.type == 6).length}\`\n**Vc**: \`${guild.channels.filter(x => x.type == 2).length}\``, inline: true});
+        toSend.embed.fields.push({name: '__Roles/Emojis__', value: `**Roles**: \`${guild.roles.size}\`\n**Emojis**: \`${guild.emojis.length}\``, inline: true})
+        toSend.embed.fields.push({name: '__Boost__', value: `**Tier**: \`${guild.premiumTier}\`\n**Count**: \`${guild.premiumSubscriptionCount}\``, inline: true});
+        toSend.embed.fields.push({name: '__Region__', value: `${Object.getOwnPropertyDescriptor(region, guild.region).value}`, inline: true});
+        toSend.embed.fields.push({name: '__Bot joined__', value: prettyMs(Date.now() - guild.joinedAt), inline: true})
+        toSend.embed.fields.push({name: '__Guild features__', value: `\`${guild.features.length != 0 ? guild.features.join("\n` `") : "None"}\``})
 
 
-        msg.channel.send({embed: embed});
+
+        msg.channel.send(toSend);
 
     
 

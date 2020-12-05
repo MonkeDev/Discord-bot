@@ -2,7 +2,7 @@ const { inspect } = require("util");
 
 const baseCmd = require("../../../Structors/Command");
 
-module.exports = class Help extends baseCmd {
+module.exports = class extends baseCmd {
     constructor(bot){
         super(bot, {
             name: "warn",

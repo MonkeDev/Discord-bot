@@ -4,4 +4,10 @@ module.exports = eris => {
             return `${this.username}#${this.discriminator}`
         }
     })
+
+    Object.defineProperty(eris.User.prototype, "hasFlag", {
+        value: function(flag){
+
+        }
+    })
 }

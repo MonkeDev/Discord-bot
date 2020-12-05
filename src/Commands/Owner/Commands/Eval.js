@@ -8,7 +8,7 @@ const prettyMs = require("pretty-ms");
 
 const baseCmd = require("../../../Structors/Command");
 
-module.exports = class Help extends baseCmd {
+module.exports = class extends baseCmd {
     constructor(bot){
         super(bot, {
             name: "eval",
@@ -39,7 +39,8 @@ module.exports = class Help extends baseCmd {
             evaled = hasAwait ? await eval(`(async () => { ${hasReturn ? " " : "return"} ${input} })()`) : eval(input);
             if(typeof evaled != "string"){
                 evaled = inspect(evaled, {
-                    depth: +!(inspect(evaled, { depth: 1 }))
+                    depth: +!(inspect(evaled, { depth: 2 }))
+                    //depth: 1
                 });
             }
         }catch(err){

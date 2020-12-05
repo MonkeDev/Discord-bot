@@ -1,5 +1,5 @@
-require("../envSet")();
-
+//require("../envSet")();
+import "../envSet"
 const fs = require("fs");
 const Client = require("./Structors/Client");
 
@@ -17,8 +17,7 @@ const bot = new Client(process.env.botToken, {
         "guildMessages"
     ],
     getAllUsers: true,
-    restMode: true,
-    maxShards: 'auto'
+    restMode: true
 
 }, process.env.mongoInfo, {
     useNewUrlParser: true,
