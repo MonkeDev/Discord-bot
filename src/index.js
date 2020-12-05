@@ -55,8 +55,6 @@ const init = async () => {
     })
 
     bot.connectMongo();
-
-    console.log("Init function has ran");
     
 };
 
